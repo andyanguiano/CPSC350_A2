@@ -5,6 +5,7 @@ using namespace std;
 
 class RunGame{
 
-  RunGame();
+  void RunGame();
 
-}
+
+};

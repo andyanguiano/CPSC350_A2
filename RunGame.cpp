@@ -1,6 +1,6 @@
 #include "RunGame"
 
-RunGame::RunGame(
+void RunGame::RunGame(){
   //variables
   //decisions
   string startDecision = "";
@@ -62,9 +62,4 @@ RunGame::RunGame(
     break;
   }
 
-
-
-
-
-
-)
+}
