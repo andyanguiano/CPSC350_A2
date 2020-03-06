@@ -6,9 +6,9 @@ using namespace std;
 
 class Grid{
   public:
-    void grid();
-    void grid(int row, int column, float density);
-    void ~grid();
+    Grid();
+    Grid(int row, int column, float density);
+    ~Grid();
 
     int getRow();
     int getColumn();
