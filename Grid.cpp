@@ -1,19 +1,19 @@
 #include "Grid.h"
 
 
-void Grid::grid(){
-  int row = 0;
-  int column = 0;
-  float density = 0.0;
+Grid::Grid(){
+  m_row = 0;
+  m_column = 0;
+  m_density = 0.0;
 }
 
-void Grid::grid(int row, int column, float density){
+Grid::Grid(int row, int column, float density){
   m_row = row;
   m_column = column;
   m_density = density;
 }
 
-void ~grid(){
+Grid::~Grid(){
   //delete
 }
 
@@ -39,16 +39,16 @@ void Grid::setDensity(float density){
 
 //return board
 int** Grid::createRandom(){
-  int matrix = new int*[row];
-  for(int i = 0; i < row; ++i){
-    matrix[i] = new int[column];
+  int matrix = new int*[m_row];
+  for(int i = 0; i < m_row; ++i){
+    matrix[i] = new int[m_column];
   }
 
-  for(int i = 0; i < row; ++i){
-    for(int j = 0; j < column; ++j){
+  for(int i = 0; i < m_row; ++i){
+    for(int j = 0; j < m_column; ++j){
       //generate number between 0 and 1
       float temp = rand()% 1+0;
-      if(density <= temp){
+      if(m_density <= temp){
         matrix[i][j] = 1;
       }else{
         matrix[i][j] = 0;
@@ -67,21 +67,21 @@ int** Grid::createFile(string file){
   while(!infs.eof()){
     if(!infs.fail()){
       string line = "";
-      getline(infs, line)
-      rows = int(line);
-      getline(infs,line)
-      column = int(line);
+      getline(infs, line);
+      m_row = int(line);
+      getline(infs,line);
+      m_column = int(line);
       //matrix
-      int matrix = new int*[row];
-      for(i = 0; i < row; ++i){
-        matrix[i] = new int[column];
+      int matrix = new int*[m_row];
+      for(int i = 0; i < m_row; ++i){
+        matrix[i] = new int[m_column];
       }
 
       int tempRow = -1;
       while(getline(infs, line)){
         ++tempRow;
         int tempColumn = -1;
-        foreach(char c in line){ //temp variable c in line
+        for(char c : line){ //temp variable c in line
           ++tempColumn;
           if (c == "-"){
             matrix[tempRow][tempColumn] = 0;
