@@ -14,7 +14,7 @@ Grid::Grid(int row, int column, float density){
 }
 
 Grid::~Grid(){
-  //delete
+  delete matrix;
 }
 
 int Grid::getRow(){
@@ -37,28 +37,31 @@ void Grid::setDensity(float density){
   density = m_density;
 }
 
+int** Grid::getMatrix(){
+  return matrix;
+}
+
 //return board
-int** Grid::createRandom(){
-  int matrix = new int*[m_row];
-  for(int i = 0; i < m_row; ++i){
-    matrix[i] = new int[m_column];
+void Grid::createRandom(int row, int column, float density){
+  matrix = new int*[row];
+  for(int i = 0; i < row; ++i){
+    matrix[i] = new int[column];
   }
 
-  for(int i = 0; i < m_row; ++i){
-    for(int j = 0; j < m_column; ++j){
+  for(int i = 0; i < row; ++i){
+    for(int j = 0; j < column; ++j){
       //generate number between 0 and 1
       float temp = rand()% 1+0;
-      if(m_density <= temp){
+      if(density <= temp){
         matrix[i][j] = 1;
       }else{
         matrix[i][j] = 0;
       }
     }
   }
-  return matrix;
 }
 
-int** Grid::createFile(string file){
+void Grid::createFile(string file){
   ifstream infs;
   ofstream outfs;
 
@@ -67,14 +70,16 @@ int** Grid::createFile(string file){
   while(!infs.eof()){
     if(!infs.fail()){
       string line = "";
-      getline(infs, line);
-      m_row = int(line);
-      getline(infs,line);
-      m_column = int(line);
+      int row = 0;
+      int column = 0;
+      getline(infs, line); // not sure
+      row = stoi(line);
+      getline(infs,line); // not sure
+      column = stoi(line);
       //matrix
-      int matrix = new int*[m_row];
-      for(int i = 0; i < m_row; ++i){
-        matrix[i] = new int[m_column];
+      matrix = new int*[row];
+      for(int i = 0; i < row; ++i){
+        matrix[i] = new int[column];
       }
 
       int tempRow = -1;
@@ -83,16 +88,20 @@ int** Grid::createFile(string file){
         int tempColumn = -1;
         for(char c : line){ //temp variable c in line
           ++tempColumn;
-          if (c == "-"){
+          if (c == '-'){
             matrix[tempRow][tempColumn] = 0;
-          }else if(c == "X"){
+          }else if(c == 'X'){
             matrix[tempRow][tempColumn] = 1;
           }
         }
       }
     }
   }
-
-  return matrix;
-
 }
+
+/*
+int Grid::main(int argc, char **argv){
+  createRandom(5,5,0.5);
+  return 0;
+}
+*/

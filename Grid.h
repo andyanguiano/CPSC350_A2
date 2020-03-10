@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//class to create a grid
 class Grid{
   public:
     Grid();
@@ -12,18 +13,21 @@ class Grid{
 
     int getRow();
     int getColumn();
-    float  getDensity();
+    float getDensity();
 
     void setRow(int row);
     void setColumn(int column);
     void setDensity(float density);
+    int** getMatrix();
 
 
     int** matrix;
 
-    //return board
-    int **createRandom();
-    int **createFile(string file);
+    void createRandom(int row, int column, float density);
+    void createFile(string file);
+
+    //temp
+    //int main(int argc, char **argv);
 
 
   private:
