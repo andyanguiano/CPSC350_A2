@@ -12,7 +12,7 @@ void RunGame::playGame(){
   //make a new classic mode here. classic mode makes a grid.
   //1.
   cout << "Would you like to start with a random configuration or read a flat file?" << endl;
-  cout << "(random / file)";
+  cout << "(random / file)" << endl;
   cin >> startDecision;
 
 
@@ -27,7 +27,7 @@ void RunGame::playGame(){
   cin >> outputDecision;
 
 
-  //1
+  //1 
   if(startDecision == "random"){
     int rowChoice = 0;
     int columnChoice = 0;
@@ -56,7 +56,7 @@ void RunGame::playGame(){
     cout << "That was not an option" << endl;
   }
 
-  //3
+  //3 Output decision
   if(outputDecision == "pause"){
     //run the pause
 
@@ -71,9 +71,11 @@ void RunGame::playGame(){
     cout << "That was not an option" << endl;
   }
 
-  //2
+  //2 GameMode
   if(gameMode == "classic"){
     //run classic game mode class
+    ClassicMode play = ClassicMode(gameGrid);
+    play.throughBoard();
   }else if(gameMode == "doughnut"){
     //run douhgnut game mode
   }else if(gameMode == "mirror"){

@@ -206,4 +206,15 @@ void ClassicMode::throughBoard(){
       checkMatrix[i][j] = m_matrix[i][j];
     }
   }
+  for (int i = 0; i < row; ++i){
+    cout << endl;
+    for(int j = 0; j < column; ++j){
+      if(m_matrix[i][j] == 1){
+        cout << "X";
+      }else{
+        cout << "-";
+      }
+    }
+  }
+
 }
