@@ -1,11 +1,13 @@
+#include "ClassicMode.cpp"
 #include <iostream>
 #include <fstream>
+
 
 using namespace std;
 
 class RunGame{
-
-  void RunGame();
+public:
+  void playGame();
 
 
 };

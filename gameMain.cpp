@@ -1,8 +1,10 @@
-#include "RunGame.h"
+#include "RunGame.cpp"
 
 int main(int argc, char **argv) {
 
-  RunGame();
+  RunGame game1;
+  game1.playGame();
+  cout << "It works" << endl;
 
   return 0;
 }

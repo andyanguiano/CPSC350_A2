@@ -98,10 +98,3 @@ void Grid::createFile(string file){
     }
   }
 }
-
-/*
-int Grid::main(int argc, char **argv){
-  createRandom(5,5,0.5);
-  return 0;
-}
-*/

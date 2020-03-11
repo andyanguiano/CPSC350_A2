@@ -188,12 +188,22 @@ void ClassicMode::throughBoard(){
   m_matrix = m_classicMatrix->getMatrix();
 
   int checkMatrix[row][column];
-  int checkVal = 0;
-  int count = 1;
+  int prevVal = 0;
+  int count = 0;
 
   for (int i = 0; i < row; ++i){
     for (int j = 0; j < column; ++j){
-      //not sure
+      //count neigbors in m_matrix
+      count = countNeighbors(i, j, row, column, m_matrix);
+      //update checkMatrix with nextGenCell
+      prevVal = m_matrix[i][j];
+      checkMatrix[i][j] = nextGenStatus(prevVal, count);
+    }
+  }
+  for (int i = 0; i < row; ++i){
+    for (int j = 0; j < column; ++j){
+      //update m_Matrix
+      checkMatrix[i][j] = m_matrix[i][j];
     }
   }
 }

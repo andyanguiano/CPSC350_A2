@@ -1,6 +1,6 @@
-#include "RunGame"
+#include "RunGame.h"
 
-void RunGame::RunGame(){
+void RunGame::playGame(){
   //variables
   //decisions
   string startDecision = "";
@@ -8,10 +8,13 @@ void RunGame::RunGame(){
   string outputDecision = "";
   string fileName = "";
 
+  Grid *gameGrid = new Grid();
+  //make a new classic mode here. classic mode makes a grid.
   //1.
   cout << "Would you like to start with a random configuration or read a flat file?" << endl;
-  cout << "(random / file)"
+  cout << "(random / file)";
   cin >> startDecision;
+
 
   //2.
   cout << "What kind of boundary mode?" << endl;
@@ -19,47 +22,63 @@ void RunGame::RunGame(){
   cin >> gameMode;
 
   //3
-  cout << "Would you like a brief pause, press enter, or output to file" << end;
+  cout << "Would you like a brief pause, press enter, or output to file" << endl;
   cout << "(pause / enter / file)"<< endl;
   cin >> outputDecision;
 
 
   //1
-  if(tolower(startDecision) == "random"){
+  if(startDecision == "random"){
+    int rowChoice = 0;
+    int columnChoice = 0;
+    float densityChoice = 0.0;
     //create random grid with class
-  }else if(tolower(startDecision) == "file"){
+    cout << "How many rows?:" << endl;
+    cin >> rowChoice;
+    gameGrid->setRow(rowChoice);
+    cout << "How many columns?:" << endl;
+    cin >> columnChoice;
+    gameGrid->setColumn(columnChoice);
+    cout << "A decimal percentage of initial bacteria?: " << endl;
+    cin >> densityChoice;
+    gameGrid->setDensity(densityChoice);
+
+    //creates the random
+    gameGrid->createRandom(rowChoice, columnChoice, densityChoice);
+
+  }else if(startDecision == "file"){
     //create grid with read file
+    string fileName = "";
+    cout << "What is the file name?: " << endl;
+    cin >> fileName;
+    gameGrid->createFile(fileName);
   }else{
     cout << "That was not an option" << endl;
-    break;
   }
 
   //3
-  if(tolower(outputDecision) == "pause"){
+  if(outputDecision == "pause"){
     //run the pause
 
-  }else if(tolower(outputDecision) == "enter"){
+  }else if(outputDecision == "enter"){
     //run teh pause
-  }else if(tolower(outputDecision) == "file"){
-    //output to file
+  }else if(outputDecision == "file"){
     cout << "What is the file name: " << endl;
     cin >> fileName;
+    //output to file
 
   }else{
     cout << "That was not an option" << endl;
-    break;
   }
 
   //2
-  if(tolower(gameMode) == "classic"){
+  if(gameMode == "classic"){
     //run classic game mode class
-  }else if(tolower(gameMode) == "doughnut"){
+  }else if(gameMode == "doughnut"){
     //run douhgnut game mode
-  }else if(tolower(gameMode) == "mirror"){
+  }else if(gameMode == "mirror"){
     //run mirror game mode
   }else{
     cout << "That was not an option" << endl;
-    break;
   }
-
 }
