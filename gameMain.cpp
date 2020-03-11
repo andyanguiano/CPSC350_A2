@@ -1,10 +1,14 @@
-#include "RunGame.cpp"
+#include "UserIO.h"
 
 int main(int argc, char **argv) {
 
-  RunGame game1;
-  game1.playGame();
-  cout << "It works" << endl;
+  UserIO *userIO = new UserIO();
+  userIO->start();
+
+  string modeInput = userIO->getModeType();
+  string outputType = userIO->getOutputType();
+
+  RunGame* game = new RunGame(userIO->getMatrix(), modeInput, outputType);
 
   return 0;
 }

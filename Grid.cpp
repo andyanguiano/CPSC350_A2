@@ -63,38 +63,37 @@ void Grid::createRandom(int row, int column, float density){
 
 void Grid::createFile(string file){
   ifstream infs;
-  ofstream outfs;
-
   infs.open(file);
+  string currentLine = "";
+  int lineCount = 1;
+  int i = 0;
+
 
   while(!infs.eof()){
+    infs >> currentLine;
     if(!infs.fail()){
-      string line = "";
-      int row = 0;
-      int column = 0;
-      getline(infs, line); // not sure
-      row = stoi(line);
-      getline(infs,line); // not sure
-      column = stoi(line);
-      //matrix
-      matrix = new int*[row];
-      for(int i = 0; i < row; ++i){
-        matrix[i] = new int[column];
-      }
-
-      int tempRow = -1;
-      while(getline(infs, line)){
-        ++tempRow;
-        int tempColumn = -1;
-        for(char c : line){ //temp variable c in line
-          ++tempColumn;
-          if (c == '-'){
-            matrix[tempRow][tempColumn] = 0;
-          }else if(c == 'X'){
-            matrix[tempRow][tempColumn] = 1;
+      if(lineCount == 1){
+        m_row = stoi(currentLine);
+      }else if(lineCount == 2){
+        m_column = stoi(currentLine);
+        //matrix
+        matrix = new int*[m_row];
+        for(int i = 0; i < m_row; ++i){
+          matrix[i] = new int[m_column];
+        }
+      }else{
+        for(int j = 0; j < m_column; ++j){
+          char currentChar = currentLine[j];
+          if(currentChar == 'X'){
+            matrix[i][j] = 1;
+          }else if(currentChar == '-'){
+            matrix[i][j] = 0;
           }
         }
+        ++i;
       }
     }
+    ++lineCount;
   }
+  infs.close();
 }

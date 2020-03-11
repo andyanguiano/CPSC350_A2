@@ -1,164 +1,162 @@
 #include "ClassicMode.h"
 
 ClassicMode::ClassicMode(){
-  m_matrix = NULL;
   m_classicMatrix = NULL;
 }
 
 ClassicMode::ClassicMode(Grid *m){
   m_classicMatrix = m;
-  m_matrix = m->getMatrix();
 }
 
 ClassicMode::~ClassicMode(){
-  delete m_matrix;
+  delete m_classicMatrix;
 }
 
-int ClassicMode::countNeighbors(int i, int j, int row, int column, int **matrix){
+int ClassicMode::countNeighbors(int i, int j, int row, int column, Grid *matrix){
+  int **currMatrix = matrix->getMatrix();
   int count = 0;
-
   //corners
   if(i == 0){
     if(j == 0){
       //upper left corner
       //checks 3 neighbors
-      if(matrix[i][j+1] == 1){
+      if(currMatrix[i][j+1] == 1){
         count += 1;
       }
-      if(matrix[i+1][j+1] == 1){
+      if(currMatrix[i+1][j+1] == 1){
         count += 1;
       }
-      if(matrix[i+1][j] == 1){
+      if(currMatrix[i+1][j] == 1){
         count += 1;
       }
     }else if(j == column - 1){
       //upper right corner
-      if(matrix[i][j-1] == 1){
+      if(currMatrix[i][j-1] == 1){
         count += 1;
       }
-      if(matrix[i+1][j-1] == 1){
+      if(currMatrix[i+1][j-1] == 1){
         count += 1;
       }
-      if(matrix[i+1][j] == 1){
+      if(currMatrix[i+1][j] == 1){
         count += 1;
       }
     }else{
       //check top row 5 neighbors
-      if(matrix[i][j-1] == 1){
+      if(currMatrix[i][j-1] == 1){
         count += 1;
       }
-      if(matrix[i+1][j-1] == 1){
+      if(currMatrix[i+1][j-1] == 1){
         count += 1;
       }
-      if(matrix[i+1][j] == 1){
+      if(currMatrix[i+1][j] == 1){
         count += 1;
       }
-      if(matrix[i][j+1] == 1){
+      if(currMatrix[i][j+1] == 1){
         count += 1;
       }
-      if(matrix[i+1][j+1] == 1){
+      if(currMatrix[i+1][j+1] == 1){
         count += 1;
       }
     }
   }else if(i == row - 1){
     if(j == 0){
       //down left corner
-      if(matrix[i-1][j] == 1){
+      if(currMatrix[i-1][j] == 1){
         count += 1;
       }
-      if(matrix[i-1][j+1] == 1){
+      if(currMatrix[i-1][j+1] == 1){
         count += 1;
       }
-      if(matrix[i][j+1] == 1){
+      if(currMatrix[i][j+1] == 1){
         count += 1;
       }
     }else if(j == column - 1){
       //down right corner
-      if(matrix[i][j-1] == 1){
+      if(currMatrix[i][j-1] == 1){
         count += 1;
       }
-      if(matrix[i-1][j-1] == 1){
+      if(currMatrix[i-1][j-1] == 1){
         count += 1;
       }
-      if(matrix[i-1][j] == 1){
+      if(currMatrix[i-1][j] == 1){
         count += 1;
       }
     }else{
       //bottom row 5 neighbors
-      if(matrix[i][j-1] == 1){
+      if(currMatrix[i][j-1] == 1){
         count += 1;
       }
-      if(matrix[i-1][j-1] == 1){
+      if(currMatrix[i-1][j-1] == 1){
         count += 1;
       }
-      if(matrix[i-1][j] == 1){
+      if(currMatrix[i-1][j] == 1){
         count += 1;
       }
-      if(matrix[i-1][j+1] == 1){
+      if(currMatrix[i-1][j+1] == 1){
         count += 1;
       }
-      if(matrix[i][j+1] == 1){
+      if(currMatrix[i][j+1] == 1){
         count += 1;
       }
     }
   }else if(j == 0){
     //left column remaining 5 neighbors
-    if(matrix[i-1][j] == 1){
+    if(currMatrix[i-1][j] == 1){
       count += 1;
     }
-    if(matrix[i-1][j+1] == 1){
+    if(currMatrix[i-1][j+1] == 1){
       count += 1;
     }
-    if(matrix[i][j+1] == 1){
+    if(currMatrix[i][j+1] == 1){
       count += 1;
     }
-    if(matrix[i+1][j+1] == 1){
+    if(currMatrix[i+1][j+1] == 1){
       count += 1;
     }
-    if(matrix[i+1][j] == 1){
+    if(currMatrix[i+1][j] == 1){
       count += 1;
     }
   }else if(j == column - 1){
     //right column remaining
-    if(matrix[i-1][j] == 1){
+    if(currMatrix[i-1][j] == 1){
       count += 1;
     }
-    if(matrix[i-1][j-1] == 1){
+    if(currMatrix[i-1][j-1] == 1){
       count += 1;
     }
-    if(matrix[i][j-1] == 1){
+    if(currMatrix[i][j-1] == 1){
       count += 1;
     }
-    if(matrix[i+1][j-1] == 1){
+    if(currMatrix[i+1][j-1] == 1){
       count += 1;
     }
-    if(matrix[i+1][j] == 1){
+    if(currMatrix[i+1][j] == 1){
       count += 1;
     }
   }else{
     //meat count all 8 neighbors
-    if(matrix[i-1][j] == 1){
+    if(currMatrix[i-1][j] == 1){
       count += 1;
     }
-    if(matrix[i-1][j-1] == 1){
+    if(currMatrix[i-1][j-1] == 1){
       count += 1;
     }
-    if(matrix[i][j-1] == 1){
+    if(currMatrix[i][j-1] == 1){
       count += 1;
     }
-    if(matrix[i+1][j-1] == 1){
+    if(currMatrix[i+1][j-1] == 1){
       count += 1;
     }
-    if(matrix[i+1][j] == 1){
+    if(currMatrix[i+1][j] == 1){
       count += 1;
     }
-    if(matrix[i+1][j+1] == 1){
+    if(currMatrix[i+1][j+1] == 1){
       count += 1;
     }
-    if(matrix[i][j+1] == 1){
+    if(currMatrix[i][j+1] == 1){
       count += 1;
     }
-    if(matrix[i-1][j+1] == 1){
+    if(currMatrix[i-1][j+1] == 1){
       count += 1;
     }
   }
@@ -179,42 +177,30 @@ int ClassicMode::nextGenStatus(int previousStatus, int count){
   return newCell;
 }
 
-void ClassicMode::throughBoard(){
+int** ClassicMode::throughMatrix(Grid *matrix, int **current){
   int row = 0;
-  row = m_classicMatrix->getRow();
+  row = matrix->getRow();
   int column = 0;
-  column = m_classicMatrix->getColumn();
+  column = matrix->getColumn();
 
-  m_matrix = m_classicMatrix->getMatrix();
+  //create a new matrix to check values same way in Grid.cpp
+  int **checkMatrix = new int*[row];
+  for(int i = 0; i < row; ++i){
+    checkMatrix[i] = new int[column];
+  }
 
-  int checkMatrix[row][column];
   int prevVal = 0;
   int count = 0;
 
   for (int i = 0; i < row; ++i){
     for (int j = 0; j < column; ++j){
       //count neigbors in m_matrix
-      count = countNeighbors(i, j, row, column, m_matrix);
+      count = countNeighbors(i, j, row, column, matrix);
       //update checkMatrix with nextGenCell
-      prevVal = m_matrix[i][j];
+      prevVal = current[i][j];
       checkMatrix[i][j] = nextGenStatus(prevVal, count);
     }
   }
-  for (int i = 0; i < row; ++i){
-    for (int j = 0; j < column; ++j){
-      //update m_Matrix
-      checkMatrix[i][j] = m_matrix[i][j];
-    }
-  }
-  for (int i = 0; i < row; ++i){
-    cout << endl;
-    for(int j = 0; j < column; ++j){
-      if(m_matrix[i][j] == 1){
-        cout << "X";
-      }else{
-        cout << "-";
-      }
-    }
-  }
+  return checkMatrix;
 
 }

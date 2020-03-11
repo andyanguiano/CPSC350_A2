@@ -26,10 +26,6 @@ class Grid{
     void createRandom(int row, int column, float density);
     void createFile(string file);
 
-    //temp
-    //int main(int argc, char **argv);
-
-
   private:
     int m_row;
     int m_column;

@@ -1,86 +1,102 @@
 #include "RunGame.h"
 
-void RunGame::playGame(){
-  //variables
-  //decisions
-  string startDecision = "";
-  string gameMode = "";
-  string outputDecision = "";
-  string fileName = "";
+RunGame::RunGame(){
+  m_matrix = NULL;
+  m_mode = "";
+  m_genCount = 1;
+  m_end = false;
+}
 
-  Grid *gameGrid = new Grid();
-  //make a new classic mode here. classic mode makes a grid.
-  //1.
-  cout << "Would you like to start with a random configuration or read a flat file?" << endl;
-  cout << "(random / file)" << endl;
-  cin >> startDecision;
+RunGame::RunGame(Grid *matrix, string mode, string outputType){
+  m_matrix = matrix;
+  m_mode = mode;
+  m_outputType = outputType;
+  m_genCount = 1;
+  mainMatrix = matrix->getMatrix();
+  m_row = matrix->getRow();
+  m_column = matrix->getColumn();
+  checkMatrix = NULL;
+  m_end = false;
+}
 
+RunGame::~RunGame(){
+  delete m_matrix;
+}
 
-  //2.
-  cout << "What kind of boundary mode?" << endl;
-  cout << "(classic / doughnut / mirror)" << endl;
-  cin >> gameMode;
-
-  //3
-  cout << "Would you like a brief pause, press enter, or output to file" << endl;
-  cout << "(pause / enter / file)"<< endl;
-  cin >> outputDecision;
-
-
-  //1 
-  if(startDecision == "random"){
-    int rowChoice = 0;
-    int columnChoice = 0;
-    float densityChoice = 0.0;
-    //create random grid with class
-    cout << "How many rows?:" << endl;
-    cin >> rowChoice;
-    gameGrid->setRow(rowChoice);
-    cout << "How many columns?:" << endl;
-    cin >> columnChoice;
-    gameGrid->setColumn(columnChoice);
-    cout << "A decimal percentage of initial bacteria?: " << endl;
-    cin >> densityChoice;
-    gameGrid->setDensity(densityChoice);
-
-    //creates the random
-    gameGrid->createRandom(rowChoice, columnChoice, densityChoice);
-
-  }else if(startDecision == "file"){
-    //create grid with read file
-    string fileName = "";
-    cout << "What is the file name?: " << endl;
-    cin >> fileName;
-    gameGrid->createFile(fileName);
-  }else{
-    cout << "That was not an option" << endl;
+void RunGame::play(){
+  if(m_mode == "classic"){
+    ClassicMode* game = new ClassicMode(m_matrix);
+    playClassic(game, m_outputType);
   }
+}
 
-  //3 Output decision
-  if(outputDecision == "pause"){
-    //run the pause
 
-  }else if(outputDecision == "enter"){
-    //run teh pause
-  }else if(outputDecision == "file"){
-    cout << "What is the file name: " << endl;
-    cin >> fileName;
-    //output to file
-
-  }else{
-    cout << "That was not an option" << endl;
+void RunGame::printToConsole(int**matrix, int row, int column) {
+  for(int i = 0; i < row; ++i){
+    for(int j = 0; j < column; ++j){
+      int cell = matrix[i][j];
+      if(cell == 0) {
+        cout << "-";
+      }else if(cell == 1) {
+        cout << "X";
+      }
+    }
+    cout << endl;
   }
+}
 
-  //2 GameMode
-  if(gameMode == "classic"){
-    //run classic game mode class
-    ClassicMode play = ClassicMode(gameGrid);
-    play.throughBoard();
-  }else if(gameMode == "doughnut"){
-    //run douhgnut game mode
-  }else if(gameMode == "mirror"){
-    //run mirror game mode
-  }else{
-    cout << "That was not an option" << endl;
+void RunGame::printToFile(int**matrix, int row, int column) {
+  for (int i = 0; i < row; ++i) {
+    for (int j = 0; j < column; ++j) {
+      int cell = matrix[i][j];
+      if (cell == 0) {
+        //m_outFS << "-";
+      } else if (cell == 1) {
+        //m_outFS << "X";
+      }
+    }
+  //  m_outFS << endl;
+  }
+}
+
+void playClassic(ClassicMode *classic, string outputType){
+  if (outputType == "pause"){
+    while(true){
+      cout << "Generation Number" << m_genCount << endl;
+      cout << endl;
+
+      printToConsole(mainMatrix, m_row, m_column);
+      cout << endl;
+
+      checkMatrix = classic->throughMatrix(m_matrix, mainMatrix);
+      cout << endl;
+
+      m_genCount += 1;
+
+      //printToConsole(checkMatrix, m_row, m_column)
+
+      m_end = true;
+      for(int i = 0; i < m_row; ++i){
+        for(int j = 0; j < m_column; ++j){
+          if(checkMatrix[i][j] != mainMatrix[i][j]){
+            m_end = false;
+            break;
+          }
+        }
+      }
+
+      if(m_end){
+        cout << "Stablized" << endl;
+        cout << "End of Game" << endl;
+        break;
+      }
+
+      for(int i = 0; i < m_row; ++i){
+        for(int j = 0; j < m_column; ++j){
+          mainMatrix[i][j] = checkMatrix[i][j];
+        }
+      }
+    }
+    sleep(1);
   }
 }

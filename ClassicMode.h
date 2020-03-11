@@ -1,4 +1,4 @@
-#include "Grid.cpp"
+#include "Grid.h"
 
 using namespace std;
 
@@ -9,13 +9,11 @@ class ClassicMode{
     ClassicMode(Grid *matrix);
     ~ClassicMode();
 
-    int countNeighbors(int i, int j, int row, int column, int** b);
+    int countNeighbors(int i, int j, int row, int column, Grid *matrix);
 
     int nextGenStatus(int previousStatus, int numNeighbors);
 
-    void throughBoard();
-
-    int** m_matrix;
+    int **throughMatrix(Grid *matrix, int **current);
 
     Grid *m_classicMatrix;
 
