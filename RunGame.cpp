@@ -209,7 +209,7 @@ void RunGame::playMirror(MirrorMode *mirror, string outputType){
       }
 
       if(m_end){
-        cout << "Stablized" << endl;
+        cout << "Stabilized" << endl;
         cout << "End of Game" << endl;
         break;
       }
@@ -245,7 +245,7 @@ void RunGame::playMirror(MirrorMode *mirror, string outputType){
       }
 
       if(m_end){
-        cout << "Stablized" << endl;
+        cout << "Stabilized" << endl;
         cout << "End of Game" << endl;
         break;
       }
@@ -288,7 +288,7 @@ void RunGame::playMirror(MirrorMode *mirror, string outputType){
       }
 
       if(m_end){
-        outfs << "Stablized" << endl;
+        outfs << "Stabilized" << endl;
         outfs << "End of Game" << endl;
         break;
       }
