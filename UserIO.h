@@ -1,8 +1,13 @@
+/*
+Andy Anguiano & Thomas Moore
+Game of Life
+CPSC350_A2
+*/
 #include "RunGame.h"
 
 class UserIO{
   public:
-    UserIO();
+    UserIO();//default
     ~UserIO();
     Grid *m_matrix;
     string m_modeType;

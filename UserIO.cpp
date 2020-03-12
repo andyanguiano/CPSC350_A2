@@ -1,21 +1,21 @@
 #include "UserIO.h"
-
+//default
 UserIO::UserIO(){
   m_matrix = NULL;
   m_modeType = "";
   m_outputType = "";
 }
-
+//delete
 UserIO::~UserIO(){
   delete m_matrix;
 }
-
+//prompts for all user input
 void UserIO::start(){
   m_matrix = promptFileRandom();
   m_modeType = promptMode();
   m_outputType = promptOutputType();
 }
-
+//prompts for how to create grid
 Grid* UserIO::promptFileRandom(){
   string startDecision = "";
   Grid *gameGrid = new Grid();
@@ -57,7 +57,7 @@ Grid* UserIO::promptFileRandom(){
   }
   return gameGrid;
 }
-
+//prompts what mode to play
 string UserIO::promptMode(){
   string gameMode = "";
   while(gameMode != "classic" && gameMode != "doughnut" && gameMode != "mirror"){
@@ -67,7 +67,7 @@ string UserIO::promptMode(){
   }
   return gameMode;
 }
-
+//prompts hoe to output game
 string UserIO::promptOutputType(){
   string outputDecision = "";
 
@@ -78,13 +78,15 @@ string UserIO::promptOutputType(){
 
   return outputDecision;
 }
-
+//get Matrix
 Grid* UserIO::getMatrix(){
   return m_matrix;
 }
+//get mode type
 string UserIO::getModeType(){
   return m_modeType;
 }
+//get output type
 string UserIO::getOutputType(){
   return m_outputType;
 }

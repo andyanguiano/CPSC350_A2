@@ -1,13 +1,18 @@
+/*
+Andy Anguiano & Thomas Moore
+Game of Life
+CPSC350_A2
+*/
 #include "Grid.h"
 
 using namespace std;
 
-//class to play the classic game mode
+//class to play the Doughnut game mode
 class DoughnutMode{
   public:
-    DoughnutMode();
-    DoughnutMode(Grid *matrix);
-    ~DoughnutMode();
+    DoughnutMode();//defalut
+    DoughnutMode(Grid *matrix);//overloaded
+    ~DoughnutMode();//delete
 
     int countNeighbors(int i, int j, int row, int column, Grid *matrix);
 

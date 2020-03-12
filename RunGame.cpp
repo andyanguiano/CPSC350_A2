@@ -1,12 +1,12 @@
 #include "RunGame.h"
-
+//default
 RunGame::RunGame(){
   m_matrix = NULL;
   m_mode = "";
   m_genCount = 1;
   m_end = false;
 }
-
+//overloaded
 RunGame::RunGame(Grid *matrix, string mode, string outputType){
   m_matrix = matrix;
   m_mode = mode;
@@ -19,11 +19,11 @@ RunGame::RunGame(Grid *matrix, string mode, string outputType){
   m_end = false;
 
 }
-
+//delete
 RunGame::~RunGame(){
   delete m_matrix;
 }
-
+//play games and creates gamemode objects
 void RunGame::play(){
   if(m_mode == "classic"){
     ClassicMode* game = new ClassicMode(m_matrix);
@@ -36,8 +36,7 @@ void RunGame::play(){
     playDoughnut(game, m_outputType);
   }
 }
-
-
+//prints grid to console
 void RunGame::printToConsole(int**matrix, int row, int column){
   for(int i = 0; i < row; ++i){
     for(int j = 0; j < column; ++j){
@@ -52,7 +51,7 @@ void RunGame::printToConsole(int**matrix, int row, int column){
     cout << endl;
   }
 }
-
+//prints grid to file
 void RunGame::printToFile(int**matrix, int row, int column) {
   for (int i = 0; i < row; ++i) {
     for (int j = 0; j < column; ++j) {
@@ -66,21 +65,23 @@ void RunGame::printToFile(int**matrix, int row, int column) {
     outfs << endl;
   }
 }
-
+//plays classic game
 void RunGame::playClassic(ClassicMode *classic, string outputType){
+  //pauses after each output
   if(outputType == "pause"){
     while(true){
+      //outputs generation count
       cout << "Generation: " << m_genCount << endl;
 
       printToConsole(mainMatrix, m_row, m_column);
-
+      //checks matrix
       checkMatrix = classic->throughMatrix(m_matrix, mainMatrix);
       cout << endl;
 
       m_genCount += 1;
 
       //printToConsole(checkMatrix, m_row, m_column);
-
+      //checks if stabalized
       m_end = true;
       for(int i = 0; i < m_row; ++i){
         for(int j = 0; j < m_column; ++j){
@@ -96,7 +97,7 @@ void RunGame::playClassic(ClassicMode *classic, string outputType){
         cout << "End of Game" << endl;
         break;
       }
-
+      //reverts new matrix to main matrix
       for(int i = 0; i < m_row; ++i){
         for(int j = 0; j < m_column; ++j){
           mainMatrix[i][j] = checkMatrix[i][j];
@@ -186,7 +187,7 @@ void RunGame::playClassic(ClassicMode *classic, string outputType){
     outfs.close();
   }
 }
-
+//plays mirror
 void RunGame::playMirror(MirrorMode *mirror, string outputType){
   if(outputType == "pause"){
     while(true){
@@ -306,7 +307,7 @@ void RunGame::playMirror(MirrorMode *mirror, string outputType){
     outfs.close();
   }
 }
-
+//plays dougnut
 void RunGame::playDoughnut(DoughnutMode *doughnut, string outputType){
   if(outputType == "pause"){
     while(true){

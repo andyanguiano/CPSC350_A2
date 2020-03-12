@@ -1,18 +1,19 @@
 #include "MirrorMode.h"
-
+//default
 MirrorMode::MirrorMode(){
   m_classicMatrix = NULL;
 }
-
+//overloaded
 MirrorMode::MirrorMode(Grid *m){
   m_classicMatrix = m;
 }
-
+//delete
 MirrorMode::~MirrorMode(){
   delete m_classicMatrix;
 }
-
+//counts the number of neighbors for mirror game mode
 int MirrorMode::countNeighbors(int i, int j, int row, int column, Grid *matrix){
+  //takes matrix
   int **currMatrix = matrix->getMatrix();
   int count = 0;
   //corners
@@ -186,7 +187,7 @@ int MirrorMode::countNeighbors(int i, int j, int row, int column, Grid *matrix){
   }
   return count;
 }
-
+//checks to see how many neighbors whether teh cell will die or live on
 int MirrorMode::nextGenStatus(int previousStatus, int count){
   int newCell = 0;
   if (count <= 1) {
@@ -200,7 +201,7 @@ int MirrorMode::nextGenStatus(int previousStatus, int count){
   }
   return newCell;
 }
-
+//iterates through matrix with count neighbors and next gen status
 int** MirrorMode::throughMatrix(Grid *matrix, int **current){
   int row = 0;
   row = matrix->getRow();
@@ -215,7 +216,7 @@ int** MirrorMode::throughMatrix(Grid *matrix, int **current){
 
   int prevVal = 0;
   int count = 0;
-
+  
   for (int i = 0; i < row; ++i){
     for (int j = 0; j < column; ++j){
       //count neigbors in m_matrix

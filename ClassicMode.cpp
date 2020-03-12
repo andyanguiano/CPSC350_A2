@@ -1,17 +1,17 @@
 #include "ClassicMode.h"
-
+//default
 ClassicMode::ClassicMode(){
   m_classicMatrix = NULL;
 }
-
+//overloaded
 ClassicMode::ClassicMode(Grid *m){
   m_classicMatrix = m;
 }
-
+//delete
 ClassicMode::~ClassicMode(){
   delete m_classicMatrix;
 }
-
+//counts number of neighbors for classic mode
 int ClassicMode::countNeighbors(int i, int j, int row, int column, Grid *matrix){
   int **currMatrix = matrix->getMatrix();
   int count = 0;
@@ -162,7 +162,7 @@ int ClassicMode::countNeighbors(int i, int j, int row, int column, Grid *matrix)
   }
   return count;
 }
-
+//see whether cell will be alive next generation
 int ClassicMode::nextGenStatus(int previousStatus, int count){
   int newCell = 0;
   if (count <= 1) {
@@ -176,7 +176,7 @@ int ClassicMode::nextGenStatus(int previousStatus, int count){
   }
   return newCell;
 }
-
+//iterates through matrix
 int** ClassicMode::throughMatrix(Grid *matrix, int **current){
   int row = 0;
   row = matrix->getRow();

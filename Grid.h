@@ -1,5 +1,9 @@
+/*
+Andy Anguiano & Thomas Moore
+Game of Life
+CPSC350_A2
+*/
 #pragma once
-
 #include <iostream>
 #include <fstream>
 #include <random>
@@ -10,9 +14,9 @@ using namespace std;
 //class to create a grid
 class Grid{
   public:
-    Grid();
-    Grid(int row, int column, float density);
-    ~Grid();
+    Grid();//default construcor
+    Grid(int row, int column, float density);//overload constructor
+    ~Grid();//delete
 
     int getRow();
     int getColumn();

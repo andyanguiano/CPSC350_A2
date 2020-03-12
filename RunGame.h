@@ -1,3 +1,8 @@
+/*
+Andy Anguiano & Thomas Moore
+Game of Life
+CPSC350_A2
+*/
 #include "ClassicMode.h"
 #include "MirrorMode.h"
 #include "DoughnutMode.h"
@@ -11,9 +16,9 @@ using namespace std;
 
 class RunGame{
 public:
-  RunGame();
-  RunGame(Grid *matrix, string mode, string outputType);
-  ~RunGame();
+  RunGame();//defalut
+  RunGame(Grid *matrix, string mode, string outputType);//overloaded
+  ~RunGame();//delete
 
 
   void play();
