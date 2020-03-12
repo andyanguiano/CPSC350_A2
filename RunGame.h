@@ -1,5 +1,6 @@
 #include "ClassicMode.h"
 #include "MirrorMode.h"
+#include "DoughnutMode.h"
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
@@ -19,6 +20,7 @@ public:
 
   void playClassic(ClassicMode *classic, string outputType);
   void playMirror(MirrorMode *mirror, string outputType);
+  void playDoughnut(DoughnutMode *mirror, string outputType);
 
   void printToConsole(int** matrix, int row, int column);
   void printToFile(int** matrix, int row, int column);
