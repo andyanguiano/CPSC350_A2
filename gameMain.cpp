@@ -9,6 +9,7 @@ int main(int argc, char **argv) {
   string outputType = userIO->getOutputType();
 
   RunGame* game = new RunGame(userIO->getMatrix(), modeInput, outputType);
+  game->play();
 
   return 0;
 }

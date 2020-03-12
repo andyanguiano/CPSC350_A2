@@ -26,11 +26,12 @@ public:
   int **checkMatrix;
   string m_mode;
   string m_outputType;
-  int m_genCount;
   int m_row;
   int m_column;
   bool m_end;
-  ofstream outFS;
+  ofstream outfs;
 
+private:
+  int m_genCount;
 
 };

@@ -67,9 +67,10 @@ string UserIO::promptMode(){
 string UserIO::promptOutputType(){
   string outputDecision = "";
 
-  cout << "Would you like a brief pause, press enter, or output to file" << endl;
+  cout << "Would you like a brief pause, press enter, or output to file?" << endl;
   cout << "(pause / enter / file)"<< endl;
   cin >> outputDecision;
+  cout << endl;
 
   return outputDecision;
 }

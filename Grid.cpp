@@ -28,13 +28,13 @@ float Grid::getDensity(){
 }
 
 void Grid::setRow(int row){
-  row = m_row;
+  m_row = row;
 }
 void Grid::setColumn(int column){
-  column = m_column;
+  m_column = column;
 }
 void Grid::setDensity(float density){
-  density = m_density;
+  m_density = density;
 }
 
 int** Grid::getMatrix(){
@@ -51,7 +51,8 @@ void Grid::createRandom(int row, int column, float density){
   for(int i = 0; i < row; ++i){
     for(int j = 0; j < column; ++j){
       //generate number between 0 and 1
-      float temp = rand()% 1+0;
+      float temp = rand()% 100;
+      temp /= 100;
       if(density <= temp){
         matrix[i][j] = 1;
       }else{
@@ -68,12 +69,11 @@ void Grid::createFile(string file){
   int lineCount = 1;
   int i = 0;
 
-
-  while(!infs.eof()){
-    infs >> currentLine;
+  while(infs >> currentLine){
     if(!infs.fail()){
       if(lineCount == 1){
         m_row = stoi(currentLine);
+        cout << m_row << endl;
       }else if(lineCount == 2){
         m_column = stoi(currentLine);
         //matrix
