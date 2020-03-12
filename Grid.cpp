@@ -69,6 +69,10 @@ void Grid::createFile(string file){
   int lineCount = 1;
   int i = 0;
 
+  if(!infs.is_open()){
+    cout << "Could not open file. Start program over." << endl;
+  }
+  
   while(infs >> currentLine){
     if(!infs.fail()){
       if(lineCount == 1){

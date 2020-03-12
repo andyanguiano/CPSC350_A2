@@ -19,11 +19,15 @@ void UserIO::start(){
 Grid* UserIO::promptFileRandom(){
   string startDecision = "";
   Grid *gameGrid = new Grid();
-
-  cout << "Would you like to start with a random configuration or read a flat file?" << endl;
-  cout << "(random / file)" << endl;
-  cin >> startDecision;
-
+  while(startDecision != "random" && startDecision != "file"){
+    cout << "Would you like to start with a random configuration or read a flat file?" << endl;
+    cout << "(random / file)" << endl;
+    cin >> startDecision;
+    cout << endl;
+    if(startDecision != "random" && startDecision != "file"){
+      cout << "That was not an option" << endl;
+    }
+  }
   if(startDecision == "random"){
     int rowChoice = 0;
     int columnChoice = 0;
@@ -56,11 +60,11 @@ Grid* UserIO::promptFileRandom(){
 
 string UserIO::promptMode(){
   string gameMode = "";
-
-  cout << "What kind of boundary mode?" << endl;
-  cout << "(classic / doughnut / mirror)" << endl;
-  cin >> gameMode;
-
+  while(gameMode != "classic" && gameMode != "doughnut" && gameMode != "mirror"){
+    cout << "What kind of boundary mode?" << endl;
+    cout << "(classic / doughnut / mirror)" << endl;
+    cin >> gameMode;
+  }
   return gameMode;
 }
 
