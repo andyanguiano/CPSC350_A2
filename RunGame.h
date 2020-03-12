@@ -1,4 +1,5 @@
 #include "ClassicMode.h"
+#include "MirrorMode.h"
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
@@ -17,6 +18,7 @@ public:
   void play();
 
   void playClassic(ClassicMode *classic, string outputType);
+  void playMirror(MirrorMode *mirror, string outputType);
 
   void printToConsole(int** matrix, int row, int column);
   void printToFile(int** matrix, int row, int column);

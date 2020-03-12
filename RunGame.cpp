@@ -183,3 +183,123 @@ void RunGame::playClassic(ClassicMode *classic, string outputType){
     outfs.close();
   }
 }
+
+void RunGame::playMirror(MirrorMode *mirror, string outputType){
+  if(outputType == "pause"){
+    while(true){
+      cout << "Generation: " << m_genCount << endl;
+
+      printToConsole(mainMatrix, m_row, m_column);
+
+      checkMatrix = mirror->throughMatrix(m_matrix, mainMatrix);
+      cout << endl;
+
+      m_genCount += 1;
+
+      //printToConsole(checkMatrix, m_row, m_column);
+
+      m_end = true;
+      for(int i = 0; i < m_row; ++i){
+        for(int j = 0; j < m_column; ++j){
+          if(checkMatrix[i][j] != mainMatrix[i][j]){
+            m_end = false;
+            break;
+          }
+        }
+      }
+
+      if(m_end){
+        cout << "Stablized" << endl;
+        cout << "End of Game" << endl;
+        break;
+      }
+
+      for(int i = 0; i < m_row; ++i){
+        for(int j = 0; j < m_column; ++j){
+          mainMatrix[i][j] = checkMatrix[i][j];
+        }
+      }
+    }
+    sleep(1);
+  }else if(outputType == "enter"){
+    while(true){
+      cout << "Generation: " << m_genCount << endl;
+
+      printToConsole(mainMatrix, m_row, m_column);
+
+      checkMatrix = mirror->throughMatrix(m_matrix, mainMatrix);
+      cout << endl;
+
+      m_genCount += 1;
+
+      //printToConsole(checkMatrix, m_row, m_column);
+
+      m_end = true;
+      for(int i = 0; i < m_row; ++i){
+        for(int j = 0; j < m_column; ++j){
+          if(checkMatrix[i][j] != mainMatrix[i][j]){
+            m_end = false;
+            break;
+          }
+        }
+      }
+
+      if(m_end){
+        cout << "Stablized" << endl;
+        cout << "End of Game" << endl;
+        break;
+      }
+
+      for(int i = 0; i < m_row; ++i){
+        for(int j = 0; j < m_column; ++j){
+          mainMatrix[i][j] = checkMatrix[i][j];
+        }
+      }
+      cout << "Press Enter" << endl;
+      cin.ignore();
+    }
+  }else if(outputType == "file"){
+    string fileName = "";
+    cout << "Name of the file: ";
+    cin >> fileName;
+
+    outfs.open(fileName);
+
+    while(true){
+      outfs << "Generation: " << m_genCount << endl;
+
+      printToFile(mainMatrix, m_row, m_column);
+      outfs << endl;
+
+      checkMatrix = mirror->throughMatrix(m_matrix, mainMatrix);
+
+      m_genCount += 1;
+
+      //printToFile(checkMatrix, m_row, m_column);
+
+      m_end = true;
+      for(int i = 0; i < m_row; ++i){
+        for(int j = 0; j < m_column; ++j){
+          if(checkMatrix[i][j] != mainMatrix[i][j]){
+            m_end = false;
+            break;
+          }
+        }
+      }
+
+      if(m_end){
+        outfs << "Stablized" << endl;
+        outfs << "End of Game" << endl;
+        break;
+      }
+
+      for(int i = 0; i < m_row; ++i){
+        for(int j = 0; j < m_column; ++j){
+          mainMatrix[i][j] = checkMatrix[i][j];
+        }
+      }
+    }
+    cout << "Printed to file." << endl;
+    outfs.close();
+  }
+}
